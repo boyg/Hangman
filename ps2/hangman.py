@@ -1,6 +1,6 @@
 # Problem Set 2, hangman.py
-
 # Hangman Game
+
 # -----------------------------------
 # Helper code
 # You don't need to understand this helper code,
@@ -37,8 +37,7 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-# end of helper code
-
+# End of helper code
 # -----------------------------------
 
 # Load the list of words into the variable wordlist
@@ -192,9 +191,25 @@ def match_with_gaps(my_word, other_word):
         False otherwise: 
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    if len(my_word) != len(other_word):
+        return False
 
+    already_revealed = set()
 
+    for i in range(0, len(my_word)):
+        # False case 1: letter is not hidden, and they don't match. False
+        if my_word[i] != '_' and my_word[i] != other_word[i]:
+            return False
+
+        # False case 2: letter is not hidden, but was supposed to be in a previous underscore. False
+        if my_word[i] == other_word[i] and other_word[i] in already_revealed:
+            return False
+
+        # Update already_revealed set
+        if my_word[i] == '_' and other_word[i] not in already_revealed:
+            already_revealed.add(other_word[i])
+
+    return True
 
 def show_possible_matches(my_word):
     '''
@@ -206,10 +221,15 @@ def show_possible_matches(my_word):
              that has already been revealed.
 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    found_one = None
+    
+    for word in wordlist:
+        if match_with_gaps(my_word, word):
+            print(word, end=' ')
+            found_one = True
 
-
+    if not found_one:
+        print('No matches found')
 
 def hangman_with_hints(secret_word):
     '''
@@ -239,9 +259,59 @@ def hangman_with_hints(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    letters_guessed = []
+    guesses_remaining = 6
+    warnings_remaining = 3
 
+    print('Welcome to the game Hangman!')
+    print('I am thinking of a word that is', len(secret_word), 'letters long.')
+    print('You have', warnings_remaining, 'warnings left.')
+    print('-------------')
 
+    while True:
+        print('You have', guesses_remaining, 'guesses left.')
+        print('Available letters:', get_available_letters(letters_guessed))
+        guess = input('Please guess a letter:').lower()
+
+        if guess == '*':
+            print('Possible word matches are:')
+            show_possible_matches(guess)
+
+        elif not guess.isalpha():
+            if warnings_remaining == 0:
+                guesses_remaining -= 1
+                print('Oops! That is not a valid letter. You have no warnings left so you lose one guess:', get_guessed_word(secret_word, letters_guessed))
+            else:
+                warnings_remaining -= 1
+                print('Oops! That is not a valid letter. You have', warnings_remaining, 'warnings left:', get_guessed_word(secret_word, letters_guessed))
+        elif guess in letters_guessed:
+            if warnings_remaining == 0:
+                guesses_remaining -=1
+                print('Oops! You\'ve already guessed that letter. You have no warnings left so you lose one guess:', get_guessed_word(secret_word, letters_guessed))
+            else:
+                warnings_remaining -= 1
+                print('Oops! You\'ve already guessed that letter. You have', warnings_remaining, 'warnings left :', get_guessed_word(secret_word, letters_guessed))
+        elif guess in secret_word:
+            letters_guessed.append(guess)
+            print('Good guess:', get_guessed_word(secret_word, letters_guessed))
+        else:
+            if guess in ['a', 'e', 'i', 'o', 'u']:
+                guesses_remaining -= 2
+            else:
+                guesses_remaining -= 1
+            letters_guessed.append(guess)
+            print('Oops! That letter is not in my word:', get_guessed_word(secret_word, letters_guessed))
+        
+        print('------------')
+
+        if is_word_guessed(secret_word, letters_guessed):
+            score = guesses_remaining * len(set(secret_word)) # guesses_remaining * number unique letters in secret_word
+            print('Congratulations, you won!')
+            print('Your total score for this game is:', score)
+            break
+        elif guesses_remaining <= 0:
+            print('Sorry, you ran out of guesses. The word was', secret_word + '.')
+            break
 
 # When you've completed your hangman_with_hint function, comment the two similar
 # lines above that were used to run the hangman function, and then uncomment
@@ -255,13 +325,13 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+    #secret_word = choose_word(wordlist)
+    #hangman(secret_word)
 
 ###############
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
     
-    #secret_word = choose_word(wordlist)
-    #hangman_with_hints(secret_word)
+    secret_word = choose_word(wordlist)
+    hangman_with_hints(secret_word)
