@@ -1,7 +1,4 @@
 # Problem Set 2, hangman.py
-# Name: 
-# Collaborators:
-# Time spent:
 
 # Hangman Game
 # -----------------------------------
@@ -63,21 +60,9 @@ def is_word_guessed(secret_word, letters_guessed):
     for char in letters_guessed:
     	if char not in my_secret_word:
     		return False
-    	my_secret_word.replace(char, "", 1) # Might be my_secret_word = my_secret_word.replace(char, "", 1)
+    	my_secret_word.replace(char, "") # Might be my_secret_word = my_secret_word.replace(char, "", 1)
 
     return True
-
-def rreplace(s, old, new, occurrence):
-	'''
-	Auxilliary function for get_guessed_word, taken from
-	https://stackoverflow.com/questions/2556108/rreplace-how-to-replace-the-last-occurrence-of-an-expression-in-a-string
-	s: string to be modified
-	old: string to be removed
-	new: string to be replaced with
-	occurrence: replace the last occurrence number of old chars with new chars in s
-	'''
-	li = s.rsplit(old, occurrence)
-	return new.join(li)
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -90,7 +75,7 @@ def get_guessed_word(secret_word, letters_guessed):
 
     for char in secret_word:
     	if char not in letters_guessed and char != ' ':
-    		rreplace(progress, char, '_', 1) # progress.replace(char, "_", 1) will replace the first occurrence, not the last
+    		progress.replace(char, '_')
 
     return progress
 
@@ -137,9 +122,52 @@ def hangman(secret_word):
     Follows the other limitations detailed in the problem write-up.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    print('Welcome to the game Hangman!')
+    print('I am thinking of a word that is', len(secret_word), 'letters long.')
+    print('-------------')
 
+    letters_guessed = []
+    guesses_remaining = 6
+    warnings_remaining = 3
 
+    while True:
+    	print('You have', guesses_remaining, 'guesses left.')
+    	print('Available letters:', get_available_letters(letters_guessed))
+    	guess = input('Please guess a letter:').lower()
+
+    	if not guess.isalpha():
+    		if warnings_remaining == 0:
+    			guesses_remaining -= 1
+    			print('Oops! That is not a valid letter. You have no warnings left so you lose one guess:', get_guessed_word(secret_word, letters_guessed))
+    		else:
+    			warnings_remaining -= 1
+    			print('Oops! That is not a valid letter. You have', warnings_remaining, 'warnings left:', get_guessed_word(secret_word, letters_guessed))
+    	elif guess in letters_guessed:
+    		if warnings_remaining == 0:
+    			guesses_remaining -=1
+    			print('Oops! You\'ve already guessed that letter. You have no warnings left so you lose one guess:', get_guessed_word(secret_word, letters_guessed))
+    		else:
+    			warnings_remaining -= 1
+    			print('Oops! You\'ve already guessed that letter. You have', warnings_remaining, 'warnings left :', get_guessed_word(secret_word, letters_guessed))
+    	elif guess in secret_word:
+    		letters_guessed.append(guess)
+    		print('Good guess:', get_guessed_word(secret_word, letters_guessed))
+    	else:
+    		if guess in ['a', 'e', 'i', 'o', 'u']:
+    			guesses_remaining -= 2
+    		else:
+    			guesses_remaining -= 1
+    		letters_guessed.append(guess)
+    		print('Oops! That letter is not in my word:', get_guessed_word(secret_word, letters_guessed))
+    	
+    	print('------------')
+
+    	if is_word_guessed(secret_word, letters_guessed):
+    		print('Congratulations, you won!')
+    		break
+    	elif guesses_remaining <= 0:
+    		print('Sorry, you ran out of guesses. The word was', secret_word, '.')
+    		break
 
 # When you've completed your hangman function, scroll down to the bottom
 # of the file and uncomment the first two lines to test
