@@ -57,10 +57,10 @@ def is_word_guessed(secret_word, letters_guessed):
     '''
     my_secret_word = secret_word # We will be stripping the string, so use a copy instead (IS THIS NECESSARY?)
 
-    for char in letters_guessed:
-    	if char not in my_secret_word:
+    for char in my_secret_word:
+    	if char not in letters_guessed:
     		return False
-    	my_secret_word.replace(char, "") # Might be my_secret_word = my_secret_word.replace(char, "", 1)
+    	my_secret_word = my_secret_word.replace(char, "") # Might be my_secret_word = my_secret_word.replace(char, "", 1)
 
     return True
 
