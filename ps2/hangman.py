@@ -75,7 +75,7 @@ def get_guessed_word(secret_word, letters_guessed):
 
     for char in secret_word:
     	if char not in letters_guessed and char != ' ':
-    		progress.replace(char, '_')
+    		progress = progress.replace(char, '_')
 
     return progress
 
@@ -252,7 +252,8 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = choose_word(wordlist)
+    secret_word = "apple"
+    # secret_word = choose_word(wordlist)
     hangman(secret_word)
 
 ###############
