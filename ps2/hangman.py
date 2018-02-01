@@ -227,6 +227,7 @@ def show_possible_matches(my_word):
         if match_with_gaps(my_word, word):
             print(word, end=' ')
             found_one = True
+    print('\n')
 
     if not found_one:
         print('No matches found')
@@ -275,7 +276,7 @@ def hangman_with_hints(secret_word):
 
         if guess == '*':
             print('Possible word matches are:')
-            show_possible_matches(guess)
+            show_possible_matches(get_guessed_word(secret_word, letters_guessed))
 
         elif not guess.isalpha():
             if warnings_remaining == 0:
