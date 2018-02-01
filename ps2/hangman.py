@@ -58,7 +58,7 @@ def is_word_guessed(secret_word, letters_guessed):
     my_secret_word = secret_word # We will be stripping the string, so use a copy instead (IS THIS NECESSARY?)
 
     for char in my_secret_word:
-    	if char not in letters_guessed:
+    	if char not in letters_guessed and char != ' ':
     		return False
     	my_secret_word = my_secret_word.replace(char, "") # Might be my_secret_word = my_secret_word.replace(char, "", 1)
 
@@ -252,7 +252,7 @@ if __name__ == "__main__":
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
     
-    secret_word = "apple"
+    secret_word = "apple sauce"
     # secret_word = choose_word(wordlist)
     hangman(secret_word)
 
