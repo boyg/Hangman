@@ -14,50 +14,27 @@ This project was inspired by problem set 2 of [MIT 6.0001](https://ocw.mit.edu/c
 Loading word list from file...
 55900 words loaded.
 Welcome to the game Hangman!
-I am thinking of a word that is 4 letters long.
-You have 3 warnings left.
--------------
+I am thinking of a word that is 5 letters long.
+--------
 You have 6 guesses left.
 Available letters: abcdefghijklmnopqrstuvwxyz
 Please guess a letter: a
-Good guess: _ a_ _
-------------
+Good guess: a_ _ _ _
+--------
 You have 6 guesses left.
 Available letters: bcdefghijklmnopqrstuvwxyz
-Please guess a letter: a
-Oops! You've already guessed that letter. You have 2 warnings left :
-_ a_ _
-------------
+Please guess a letter: l
+Good guess: a_ _ l_
+--------
 You have 6 guesses left.
-Available letters: bcdefghijklmnopqrstuvwxyz
-Please guess a letter: s
-Oops! That letter is not in my word.
-Please guess a letter: _ a_ _
-------------
-You have 5 guesses left.
-Available letters: bcdefghijklmnopqrtuvwxyz
-Please guess a letter: $
-Oops! That is not a valid letter. You have 1 warnings left: _ a_ _
-------------
-You have 5 guesses left.
-Available letters: bcdefghijklmnopqrtuvwxyz
-Please guess a letter: t
-Good guess: ta_ t
-------------
-You have 5 guesses left.
-Available letters: bcdefghijklmnopqrtuvwxyz
+Available letters: bcdefghijkmnopqrstuvwxyz
+Please guess a letter: *
+Possible word matches are:
+addle adult agile aisle amble ample amply amyls angle ankle apple apply aptly arils atilt
+--------
+You have 6 guesses left.
+Available letters: bcdefghijkmnopqrstuvwxyz
 Please guess a letter: e
-Oops! That letter is not in my word: ta_ t
-------------
-You have 3 guesses left.
-Available letters: bcdfghijklmnopqrtuvwxyz
-Please guess a letter: e
-Oops! You've already guessed that letter. You have 0 warnings left :
-ta_ t
-------------
-You have 3 guesses left.
-Available letters: bcdfghijklmnopqrtuvwxyz
-Please guess a letter: e
-Oops! You've already guessed that letter. You have no warnings lef t
-so you lose one guess: ta_ t
+Good guess: a_ _ le
+--------
 ```
