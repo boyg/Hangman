@@ -1,11 +1,7 @@
-# Problem Set 2, hangman.py
-# Hangman Game
+# Hangman game
 
 # -----------------------------------
-# Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
+# The following helper code is taken from problem set 2 of MIT 6.0001
 import random
 import string
 
@@ -37,13 +33,11 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-# End of helper code
-# -----------------------------------
-
 # Load the list of words into the variable wordlist
 # so that it can be accessed from anywhere in the program
 wordlist = load_words()
-
+# End of helper code
+# -----------------------------------
 
 def is_word_guessed(secret_word, letters_guessed):
     '''
@@ -74,7 +68,7 @@ def get_guessed_word(secret_word, letters_guessed):
 
     for char in secret_word:
         if char not in letters_guessed and char != ' ':
-            progress = progress.replace(char, '_')
+            progress = progress.replace(char, '_ ')
 
     return progress
 
@@ -117,10 +111,7 @@ def hangman(secret_word):
 
     * After each guess, you should display to the user the 
       partially guessed word so far.
-    
-    Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
     letters_guessed = []
     guesses_remaining = 6
     warnings_remaining = 3
@@ -171,16 +162,6 @@ def hangman(secret_word):
             print('Sorry, you ran out of guesses. The word was', secret_word + '.')
             break
 
-# When you've completed your hangman function, scroll down to the bottom
-# of the file and uncomment the first two lines to test
-#(hint: you might want to pick your own
-# secret_word while you're doing your own testing)
-
-
-# -----------------------------------
-
-
-
 def match_with_gaps(my_word, other_word):
     '''
     my_word: string with _ characters, current guess of secret word
@@ -190,23 +171,23 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise: 
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    if len(my_word) != len(other_word):
+    word = my_word.replace(' ', '')
+    if len(word) != len(other_word):
         return False
 
     already_revealed = set()
 
-    for i in range(0, len(my_word)):
+    for i in range(0, len(word)):
         # False case 1: letter is not hidden, and they don't match. False
-        if my_word[i] != '_' and my_word[i] != other_word[i]:
+        if word[i] != '_' and word[i] != other_word[i]:
             return False
 
         # False case 2: letter is not hidden, but was supposed to be in a previous underscore. False
-        if my_word[i] == other_word[i] and other_word[i] in already_revealed:
+        if word[i] == other_word[i] and other_word[i] in already_revealed:
             return False
 
         # Update already_revealed set
-        if my_word[i] == '_' and other_word[i] not in already_revealed:
+        if word[i] == '_' and other_word[i] not in already_revealed:
             already_revealed.add(other_word[i])
 
     return True
@@ -259,7 +240,6 @@ def hangman_with_hints(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
     letters_guessed = []
     guesses_remaining = 6
     warnings_remaining = 3
@@ -314,25 +294,11 @@ def hangman_with_hints(secret_word):
             print('Sorry, you ran out of guesses. The word was', secret_word + '.')
             break
 
-# When you've completed your hangman_with_hint function, comment the two similar
-# lines above that were used to run the hangman function, and then uncomment
-# these two lines and run this file to test!
-# Hint: You might want to pick your own secret_word while you're testing.
-
-
 if __name__ == "__main__":
-    # pass
-
-    # To test part 2, comment out the pass line above and
-    # uncomment the following two lines.
-    
-    #secret_word = choose_word(wordlist)
-    #hangman(secret_word)
-
-###############
-    
-    # To test part 3 re-comment out the above lines and 
-    # uncomment the following two lines. 
     
     secret_word = choose_word(wordlist)
+
+    # Uncomment one of the two following lines below
+    # Depending on whether or not you want to play with hints
+    #hangman(secret_word)
     hangman_with_hints(secret_word)
