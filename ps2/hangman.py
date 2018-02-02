@@ -1,5 +1,3 @@
-# Hangman game
-
 # -----------------------------------
 # The following helper code is taken from problem set 2 of MIT 6.0001
 import random
@@ -33,8 +31,7 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
+# Load the list of words into the variable wordlist so that it can be accessed from anywhere in the program
 wordlist = load_words()
 # End of helper code
 # -----------------------------------
@@ -48,12 +45,12 @@ def is_word_guessed(secret_word, letters_guessed):
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
       False otherwise
     '''
-    my_secret_word = secret_word # We will be stripping the string, so use a copy instead (IS THIS NECESSARY?)
+    my_secret_word = secret_word # We will be stripping the string, so use a copy instead
 
     for char in my_secret_word:
         if char not in letters_guessed and char != ' ':
             return False
-        my_secret_word = my_secret_word.replace(char, "") # Might be my_secret_word = my_secret_word.replace(char, "", 1)
+        my_secret_word = my_secret_word.replace(char, "")
 
     return True
 
