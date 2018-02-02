@@ -1,7 +1,7 @@
 # Hangman
 The objective of the game is to guess all of the letters of the secret word correctly before running out of guesses. The user may choose to play with or without hints by commenting out the appropriate code in the main of `hangman.py`.
 ## Rules
-- If the user is playing with hints, they may enter an asterisk (*) to see possible words.
+- If the user is playing with hints, they may enter an asterisk `*` to see possible answers based on what they have guessed correctly so far.
 - If user inputs a character not in the alphabet or a letter already guessed, they lose a warning.
 - If user has no warnings left, they lose a guess.
 - If the user inputs a consonant not in the word, they lose 1 guess.
