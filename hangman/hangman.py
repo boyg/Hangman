@@ -1,5 +1,5 @@
 # -----------------------------------
-# The following helper code is taken from problem set 2 of MIT 6.0001
+# Helper code
 import random
 import string
 
@@ -9,24 +9,24 @@ WORDLIST_FILENAME = "words.txt"
 def load_words():
     """
     Returns a list of valid words. Words are strings of lowercase letters.
-    
     Depending on the size of the word list, this function may
-    take a while to finish.
+    	take a while to finish.
     """
     print("Loading word list from file...")
-    # inFile: file
+
     inFile = open(WORDLIST_FILENAME, 'r')
-    # line: string
     line = inFile.readline()
-    # wordlist: list of strings
     wordlist = line.split()
+
     print("  ", len(wordlist), "words loaded.")
+    print()
+
     return wordlist
 
 def choose_word(wordlist):
     """
     wordlist (list): list of words (strings)
-    
+
     Returns a word from wordlist at random
     """
     return random.choice(wordlist)
@@ -39,11 +39,11 @@ wordlist = load_words()
 def is_word_guessed(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing; assumes all letters are
-      lowercase
+    	lowercase
     letters_guessed: list (of letters), which letters have been guessed so far;
-      assumes that all letters are lowercase
+    	assumes that all letters are lowercase
     returns: boolean, True if all the letters of secret_word are in letters_guessed;
-      False otherwise
+    	False otherwise
     '''
     my_secret_word = secret_word # We will be stripping the string, so use a copy instead
 
@@ -59,7 +59,7 @@ def get_guessed_word(secret_word, letters_guessed):
     secret_word: string, the word the user is guessing
     letters_guessed: list (of letters), which letters have been guessed so far
     returns: string, comprised of letters, underscores (_), and spaces that represents
-      which letters in secret_word have been guessed so far.
+    	which letters in secret_word have been guessed so far.
     '''
     progress = secret_word
 
@@ -77,8 +77,7 @@ def get_available_letters(letters_guessed):
     '''
     letters_not_guessed = ""
 
-    # Use ascii values to iterate over alphabet:
-    # https://terrameijar.wordpress.com/2017/02/03/python-how-to-generate-a-list-of-letters-in-the-alphabet/
+    # Use ascii values to iterate over alphabet
     for ascii in range(ord('a'), ord('z') + 1):
         letter = chr(ascii)
         if letter not in letters_guessed:
@@ -294,7 +293,8 @@ if __name__ == "__main__":
     
     secret_word = choose_word(wordlist)
 
-    # Uncomment one of the two following lines below
-    # Depending on whether or not you want to play with hints
+    # Uncomment one of the two following lines below,
+    # depending on whether or not you want to play with hints
+
     #hangman(secret_word)
     hangman_with_hints(secret_word)
