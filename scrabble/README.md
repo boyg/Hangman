@@ -1,14 +1,17 @@
 # Hangman
-The objective of the game is to guess all of the letters of the secret word correctly before running out of guesses. The user may choose to play with or without hints by commenting out the appropriate code in the main of `hangman.py`.
-## Rules
-- If the user is playing with hints, they may enter an asterisk `*` to see possible answers based on what they have guessed correctly so far.
-- If user inputs a character not in the alphabet or a letter already guessed, they lose a warning.
-- If user has no warnings left, they lose a guess.
-- If the user inputs a consonant not in the word, they lose 1 guess.
-- If the user inputs a vowel not in the word, they lose 2 guesses.
-- If they win, their total score is the number of guesses remaining multiplied by the number of unique letters in the word.
+The objective of the game is to gain as many points as possible across all hands.
+## Dealing
+- The player is dealt a hand of `HAND_SIZE` letters of the alphabet, chosen at random. This may include multiple instances of a particular letter
+- The player arranges the hand into as many words as they want out of the letters, but using each letter at most once
+- Some letters may remain unused, though the size of the hand when a word is played does affect its score
+## Scoring
+- The score for the hand is the sum of the score for each word formed
+- The score for a word is the product of:
+-- The sum of the points for letters in the word
+-- The max of 7 * `word_length` - 3 * (`n` - `word_length`) and 1
+
 ## Credits
-This project was inspired by problem set 2 of [MIT 6.0001](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/). Functions `load_words`, `choose_word`, and `is_word_guessed`, as well as the function docstrings were taken from the skeleton code supplied. The rest of the code was written independently by me.
+This project was inspired by problem set 3 of [MIT 6.0001](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/). Functions `load_words`, `choose_word`, and `is_word_guessed`, as well as the function docstrings were taken from the skeleton code supplied. The rest of the code was written independently by me.
 ## Example
 ```
 Loading word list from file...
