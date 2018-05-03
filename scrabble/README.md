@@ -7,8 +7,8 @@ The objective of the game is to gain as many points as possible across all hands
 ## Scoring
 - The score for the hand is the sum of the score for each word formed
 - The score for a word is the product of:
--- The sum of the points for letters in the word
--- The max of 7 * `word_length` - 3 * (`n` - `word_length`) and 1
+  - The sum of the points for letters in the word
+  - The max of 7 × `word_length` − 3 × (`n` - `word_length`) and 1
 
 ## Credits
 This project was inspired by problem set 3 of [MIT 6.0001](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/). Functions `load_words`, `choose_word`, and `is_word_guessed`, as well as the function docstrings were taken from the skeleton code supplied. The rest of the code was written independently by me.
