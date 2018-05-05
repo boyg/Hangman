@@ -17,6 +17,7 @@ Here is an example of the Caesar cipher running using the Python interpreter:
 ## Substitution cipher
 Here is an example of the substitution cipher running using the Python interpreter:
 ```
+>>> from sub_cipher import *
 >>> sm = SubMessage('The Lazy Yellow Lion.')
 >>> sm.apply_transpose(sm.build_transpose_dict('eaoui'))
 'Tha Lezy Yalluw Loun.'
